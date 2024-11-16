@@ -1,28 +1,25 @@
 package code.doston.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "product_category")
+public class Product_Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private BigDecimal price;
 
     @Column(name = "category_id")
     private Long categoryId;
@@ -30,6 +27,13 @@ public class Product {
     @JoinColumn(name = "category_id", updatable = false, insertable = false)
     private Category category;
 
+    @Column(name = "product_id")
+    private Long productId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id", updatable = false, insertable = false)
+    private Product product;
 
+    @Column(name = "created_date")
     private LocalDateTime createdDate;
+
 }
